@@ -4,7 +4,7 @@
   "description": "Learning Nodejs",
   "main": "index02.js",
   "scripts": {
-    "start": "nodemon index02.js"
+    "start": "nodemon index.js"
   },
   "author": "Anush Dighore",
   "license": "ISC",
