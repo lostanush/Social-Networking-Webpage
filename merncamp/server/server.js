@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import { readdirSync } from "fs";
 
 dotenv.config();
 
@@ -31,9 +32,12 @@ app.use(
 );
 
 // Routes
-app.post("/api/register", (req, res) => {
-  console.log("Register Endpoint =>", req.body);
-  res.send("User registered");
+// readdirSync("./routers").map(
+//   (r) => app.use("/api", require(`./routers/${r}`)).default
+// );
+readdirSync("./routers").map(async (r) => {
+  const { default: router } = await import(`./routers/${r}`);
+  app.use("/api", router);
 });
 
 // Start server
