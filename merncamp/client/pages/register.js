@@ -2,17 +2,17 @@ import { useState } from "react";
 import axios from "axios";
 
 const register = () => {
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secret, setSecret] = useState("");
 
   const handleSubmit = (x) => {
     x.preventDefault();
-    console.log(username, email, password, secret);
+    console.log(name, email, password, secret);
     axios
       .post("http://localhost:8000/api/register", {
-        username,
+        name,
         email,
         password,
         secret,
@@ -40,8 +40,8 @@ const register = () => {
                 type="text"
                 placeholder="Enter username"
                 className="form-control"
-                value={username}
-                onChange={(x) => setUsername(x.target.value)}
+                value={name}
+                onChange={(x) => setName(x.target.value)}
               ></input>
             </div>
 
@@ -76,9 +76,9 @@ const register = () => {
                 <label className="text-muted">Select your question:</label>
               </small>
               <select className="form-control">
-                <option>Animel ? </option>
-                <option>City ? </option>
-                <option>Colour ? </option>
+                <option>which is your favourite animal ? </option>
+                <option>which is your favourite city ? </option>
+                <option>name your favourite colour ... </option>
               </select>
             </div>
 

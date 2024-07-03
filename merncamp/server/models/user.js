@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-const { Schema } = "mongoose";
+const { Schema } = mongoose;
 
-const useSchema = new Schema(
+const userSchema = new Schema(
   {
     name: {
       type: String,
@@ -17,8 +17,8 @@ const useSchema = new Schema(
     password: {
       type: String,
       required: true,
-      min: 4,
-      max: 60,
+      minlength: 4,
+      maxlength: 60,
     },
     secret: {
       type: String,
@@ -27,9 +27,9 @@ const useSchema = new Schema(
     about: {},
     photo: String,
     following: [{ type: Schema.ObjectId, ref: "User" }],
-    following: [{ type: Schema.ObjectId, ref: "User" }],
+    followers: [{ type: Schema.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );
 
-export default mongoose.model("user", useSchema);
+export default mongoose.model("User", userSchema);
