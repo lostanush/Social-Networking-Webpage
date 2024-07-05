@@ -1,22 +1,28 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { Button, Modal } from 'antd';
+
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Modal } from "antd";
-import {Link} from " next/link ";
-import "antd/dist/antd.css";
+
+import App from "../components/cc"
+
+import Link from "next/link"
+//const Link = require("next/link")
+
 const register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secret, setSecret] = useState("");
-  const [ok, setOk] = useState(true);
+  const [ok, setOk] = useState(false);
+
 
   const handleSubmit = async (x) => {
     x.preventDefault();
     console.log(name, email, password, secret);
 
     try {
-      const { data } = await axios.post("http://localhost:8000/api/register", {
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
         name,
         email,
         password,
@@ -36,6 +42,7 @@ const register = () => {
     //   .then((res) => setOk(res.data.ok))
     //   .catch((err) => toast.error(err.response.data));
   };
+
 
   return (
     <div className="container-fluid">
@@ -118,22 +125,21 @@ const register = () => {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col">
-          <Modal
-            title="Congratulations !!"
-            visible={ok}
-            onCancel={() => setOk(false)}
-            footer={null}
-          >
-            <p>You have Successfully Registered .</p>
-            <Link href="/login">
-              <a className="btn btn-primary btn-sm"></a>
-            </Link>
-          </Modal>
-        </div>
+      <div className='row'>
+      <div className="col">
+        <Modal 
+          title="Congratulations !!"
+          visible={ok}
+          onCancel={()=>setOk(false)}
+          footer={null}          
+        >
+          <p>You have successfully registered.</p>
+          <Link href="/login" className="btn btn-primary btn-sm">Login</Link>
+          
+        </Modal>
+      </div>
       </div>
     </div>
   );
-};
+}; 
 export default register;

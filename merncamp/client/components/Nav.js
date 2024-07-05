@@ -4,7 +4,7 @@ const Nav = () => {
   return (
     <nav
       className="nav d-flex justify-content-end"
-      style={{ backgroundColor: "blue" }}
+      style={{ backgroundColor: "red" }}
     >
       <Link className="nav-link text-light" href="/">
         Home
