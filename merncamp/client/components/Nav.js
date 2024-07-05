@@ -6,8 +6,8 @@ const Nav = () => {
       className="nav d-flex justify-content-end"
       style={{ backgroundColor: "red" }}
     >
-      <Link className="nav-link text-light" href="/">
-        Home
+      <Link className="nav-link logo text-light" href="/">
+        MernCamp
       </Link>
 
       <Link className="nav-link text-light" href="/login">
