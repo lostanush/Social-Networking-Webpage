@@ -1,13 +1,9 @@
+import axios from "axios";
+import Link from "next/link"
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
-
-import axios from "axios";
 import { toast } from "react-toastify";
-
-import App from "../components/cc"
-
-import Link from "next/link"
-//const Link = require("next/link")
+import { SyncOutlined } from "@ant-design/icons";
 
 const register = () => {
   const [name, setName] = useState("");
@@ -15,20 +11,28 @@ const register = () => {
   const [password, setPassword] = useState("");
   const [secret, setSecret] = useState("");
   const [ok, setOk] = useState(false);
-
+  const [loading,setLoading] =useState(false)
 
   const handleSubmit = async (x) => {
     x.preventDefault();
-    console.log(name, email, password, secret);
+    
 
     try {
+      setLoading(true)
+      //console.log(name, email, password, secret);
       const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
         name,
         email,
         password,
         secret, 
-      });
+      }
+    );
+      setName("")
+      setEmail("")
+      setPassword("")
+      setSecret("")
       setOk(data.ok);
+      setLoading(false)
     } catch (err) {
       toast.error(err.response.data);
     }
@@ -119,7 +123,12 @@ const register = () => {
             </div>
 
             <div className="form-group p-2">
-              <button className="btn btn-primary col-12">Submit</button>
+              <button 
+                disabled={!name || !email || !password || !secret}
+                className="btn btn-primary col-12"
+              >
+                {loading ? <SyncOutlined spin className="py-1"/> : 'Submit'}
+              </button>
             </div>
           </form>
         </div>
