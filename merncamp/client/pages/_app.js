@@ -6,18 +6,14 @@ import "react-toastify/dist/ReactToastify.css";
 import "antd/dist/reset.css";
 
 const MyApp = ({ Component, pageProps }) => {
-  
-
-  
   return (
-    <> 
+    <>
       <Head>
         <link rel="stylesheet" href="/css/styles.css" />
       </Head>
       <Nav />
       <ToastContainer position="top-center" />
-     
-     
+
       <Component {...pageProps} />
     </>
   );
