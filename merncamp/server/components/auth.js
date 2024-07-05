@@ -8,7 +8,7 @@ const register = async (req, res) => {
   const exist = await User.findOne({ email });
   if (exist) return res.status(400).send("Email is taken");
   if (!password || password.length < 4)
-    return res
+    return res 
       .status(400)
       .send("Password required and must be 4 characters long");
 

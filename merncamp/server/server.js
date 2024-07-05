@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import { readdirSync } from "fs";
 
 dotenv.config();
-
+ 
 const app = express();
 
 const MONGODB = process.env.MONGODB_URI || "your-default-mongodb-uri";
