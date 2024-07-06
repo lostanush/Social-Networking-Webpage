@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import AuthForm from "../components/forms/AuthForm";
 import { useRouter } from "next/router";
 
-const register = () => {
+const login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ const register = () => {
       window.localStorage.setItem("auth", JSON.stringify(data));
       //router
       console.log(data);
-      router.push("/");
+      router.push("/dashboard");
     } catch (err) {
       toast.error(err.response.data);
     }
@@ -76,4 +76,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default login;

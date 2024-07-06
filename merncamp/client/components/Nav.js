@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 const Nav = () => {
+  const [current, setCurrent] = useState("");
   const [state, setState] = useContext(UserContext);
   const router = useRouter();
+
+  useEffect(() => {
+    process.borwser && setCurrent(window.location.pathname);
+  }, [process.borwser && window.location.pathname]);
+  console.log("current : ", current);
 
   const logout = () => {
     window.localStorage.removeItem("auth");
@@ -19,17 +25,26 @@ const Nav = () => {
         MernCamp
       </Link>
 
-      <Link className="nav-link text-light" href="/login">
-        Login
-      </Link>
+      {state !== null ? (
+        <>
+          <Link className="nav-link text-light" href="/dashboard">
+            {state && state.user && state.user.name}
+          </Link>
 
-      <Link className="nav-link text-light" href="/register">
-        Register
-      </Link>
-
-      <a onClick={logout} className="nav-link text-light" href="/login">
-        Logout
-      </a>
+          <a onClick={logout} className="nav-link text-light" href="/login">
+            Logout
+          </a>
+        </>
+      ) : (
+        <>
+          <Link className="nav-link text-light" href="/login">
+            Login
+          </Link>
+          <Link className="nav-link text-light" href="/register">
+            Register
+          </Link>
+        </>
+      )}
     </nav>
   );
 };
