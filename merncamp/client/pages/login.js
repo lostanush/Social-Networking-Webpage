@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { UserContext } from "../context";
 import axios from "axios";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -11,6 +13,7 @@ const register = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [state, setState] = useContext(UserContext);
 
   const handleSubmit = async (x) => {
     x.preventDefault();
@@ -25,6 +28,14 @@ const register = () => {
           password,
         }
       );
+      //update context
+      setState({
+        user: data.user,
+        token: data.token,
+      });
+      //save in local storage
+      window.localStorage.setItem("auth", JSON.stringify(data));
+      //router
       console.log(data);
       router.push("/");
     } catch (err) {

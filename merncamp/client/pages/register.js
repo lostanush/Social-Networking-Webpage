@@ -38,15 +38,6 @@ const register = () => {
     } catch (err) {
       toast.error(err.response.data);
     }
-    // const { data } = await axios
-    //   .post("http://localhost:8000/api/register", {
-    //     name,
-    //     email,
-    //     password,
-    //     secret,
-    //   })
-    //   .then((res) => setOk(res.data.ok))
-    //   .catch((err) => toast.error(err.response.data));
   };
 
   return (

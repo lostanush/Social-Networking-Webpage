@@ -5,14 +5,17 @@ body {
   background-image: url("/image/japan.jpg");
 }
 
-.bg-default-img{
+.bg-default-img {
   background-image: url("/images/japan.jpg");
   background-size: 100%;
   height: 150px 300px;
-  text-shadow: 2px 2px  #000;
+  text-shadow: 2px 2px #000;
 }
 
-.logo{
-  text-shadow: 2px 2px navy;
+.logo {
+  text-shadow: 2px 2px rgb(70, 13, 13);
 }
 
+.a {
+  background-color: red;
+}

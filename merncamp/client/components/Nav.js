@@ -2,10 +2,7 @@ import Link from "next/link";
 
 const Nav = () => {
   return (
-    <nav
-      className="nav d-flex justify-content-end"
-      style={{ backgroundColor: "red" }}
-    >
+    <nav className="nav d-flex justify-content-begin a">
       <Link className="nav-link logo text-light" href="/">
         MernCamp
       </Link>

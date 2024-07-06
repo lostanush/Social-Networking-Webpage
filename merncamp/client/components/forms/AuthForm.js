@@ -1,5 +1,3 @@
-import { SyncOutlined } from "@ant-design/icons";
-
 const AuthForm = ({
   handleSubmit,
   name,

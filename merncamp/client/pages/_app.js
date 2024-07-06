@@ -1,3 +1,4 @@
+import { UserProvider } from "../context";
 import Nav from "../components/Nav";
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
@@ -7,7 +8,7 @@ import "antd/dist/reset.css";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <>
+    <UserProvider>
       <Head>
         <link rel="stylesheet" href="/css/styles.css" />
       </Head>
@@ -15,7 +16,7 @@ const MyApp = ({ Component, pageProps }) => {
       <ToastContainer position="top-center" />
 
       <Component {...pageProps} />
-    </>
+    </UserProvider>
   );
 };
 
