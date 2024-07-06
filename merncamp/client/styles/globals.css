@@ -1,0 +1,19 @@
+/* globals.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  background-color: yellow;
+}
+
+.text-light {
+  color: white !important;
+}

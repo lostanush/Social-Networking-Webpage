@@ -8,7 +8,7 @@ import { readdirSync } from "fs";
 dotenv.config();
 
 const app = express();
-
+mongoose.set("strictQuery", true);
 const MONGODB = process.env.MONGODB_URI || "your-default-mongodb-uri";
 
 // Database connection
@@ -41,7 +41,7 @@ readdirSync("./routers").map(async (r) => {
 });
 
 // Start server
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

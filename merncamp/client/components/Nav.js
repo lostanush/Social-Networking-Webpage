@@ -9,9 +9,11 @@ const Nav = () => {
   const router = useRouter();
 
   useEffect(() => {
-    process.borwser && setCurrent(window.location.pathname);
-  }, [process.borwser && window.location.pathname]);
-  console.log("current : ", current);
+    if (typeof window !== "undefined") {
+      const curr = window.location.pathname;
+      setCurrent(curr);
+    }
+  }, [router.asPath]);
 
   const logout = () => {
     window.localStorage.removeItem("auth");
@@ -20,27 +22,41 @@ const Nav = () => {
   };
 
   return (
-    <nav className="nav d-flex justify-content-begin a">
-      <Link className="nav-link logo text-light" href="/">
-        MernCamp
+    <nav className="nav d-flex justify-content-start">
+      <Link
+        href="/"
+        className={`nav-link  ${current === "/" ? "active" : " logo"}`}
+      >
+        <b>MernCamp</b>
       </Link>
 
       {state !== null ? (
         <>
-          <Link className="nav-link text-light" href="/dashboard">
+          <Link
+            href="/users/dashboard"
+            className={`nav-link ${
+              current === "/users/dashboard" ? "active" : ""
+            }`}
+          >
             {state && state.user && state.user.name}
           </Link>
 
-          <a onClick={logout} className="nav-link text-light" href="/login">
+          <a onClick={logout} className="nav-link" href="/login">
             Logout
           </a>
         </>
       ) : (
         <>
-          <Link className="nav-link text-light" href="/login">
+          <Link
+            href="/login"
+            className={`nav-link ${current === "/login" ? "active" : ""}`}
+          >
             Login
           </Link>
-          <Link className="nav-link text-light" href="/register">
+          <Link
+            href="/register"
+            className={`nav-link ${current === "/register" ? "active" : ""}`}
+          >
             Register
           </Link>
         </>

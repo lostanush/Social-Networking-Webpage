@@ -37,12 +37,13 @@ const login = () => {
       window.localStorage.setItem("auth", JSON.stringify(data));
       //router
       console.log(data);
-      router.push("/dashboard");
+      router.push("/users/dashboard");
     } catch (err) {
       toast.error(err.response.data);
     }
   };
 
+  if (state && state.token) router.push("/");
   return (
     <div className="container-fluid">
       <div className="row py-5 bg-default-img text-light">

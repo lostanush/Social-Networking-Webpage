@@ -1,6 +1,7 @@
 img {
   width: 500px;
 }
+
 body {
   background-image: url("/image/japan.jpg");
 }
@@ -16,6 +17,16 @@ body {
   text-shadow: 2px 2px rgb(70, 13, 13);
 }
 
-.a {
+.nav {
   background-color: red;
+}
+
+.nav-link.active {
+  background-color: yellow;
+  color: black !important;
+}
+
+.nav-link {
+  color: white !important; /* default text color for nav links */
+  text-decoration: none; /* remove underline */
 }
