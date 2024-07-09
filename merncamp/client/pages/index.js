@@ -1,8 +1,12 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../context";
 
 const Home = () => {
   const [state, setState] = useContext(UserContext);
+
+  useEffect(()=>{
+    // console.log(state)
+  })
 
   return (
     <div className="container">
