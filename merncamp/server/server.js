@@ -30,7 +30,7 @@ app.use(
     origin: ["http://localhost:3000"],
   })
 );
-
+ 
 // Routes
 // readdirSync("./routers").map(
 //   (r) => app.use("/api", require(`./routers/${r}`)).default

@@ -64,14 +64,18 @@ export const login = async (req, res) => {
 //export default login ;
 
 export const currentUser = async (req, res) => {
-  //console.log(req.user);
+
   try {
-    console.log(req.user);
-    // // const user = User.findById(req.user._id);
-    // //   // res.json(user);
-    // //   // res.json({ ok: true });
+    //console.log(req.headers);
+    //console.log(req.user);
+    // console.log(req.auth);
+
+    const user = await User.findById(req.auth._id);
+    //res.json(user);
+    res.json({ ok: true });
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
   }
 };
+ 

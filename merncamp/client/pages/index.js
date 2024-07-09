@@ -10,7 +10,7 @@ const Home = () => {
         <div className="col">
           <h1 className="display-1 text-center py-5">Home Page : </h1>
           {JSON.stringify(state)}
-          <img src="/images/japan.jpg" alt="image" />
+           <img src="/images/japan.jpg" alt="image" />
         </div>
       </div>
     </div>

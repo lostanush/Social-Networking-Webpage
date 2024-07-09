@@ -3,7 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/users/dashboard": "pages/users/dashboard.js",
   "/login": "pages/login.js",
-  "/register": "pages/register.js"
+  "/register": "pages/register.js",
+  "/users/dashboard": "pages/users/dashboard.js"
 }
