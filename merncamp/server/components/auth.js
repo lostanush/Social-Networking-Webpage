@@ -47,7 +47,7 @@ export const login = async (req, res) => {
     if (!match) return res.status(400).send("Wrong Password");
     //...token making ...
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
+      expiresIn: "1200",
     });
     user.password = undefined;
     user.secret = undefined;
@@ -64,7 +64,6 @@ export const login = async (req, res) => {
 //export default login ;
 
 export const currentUser = async (req, res) => {
-
   try {
     //console.log(req.headers);
     //console.log(req.user);
@@ -78,4 +77,3 @@ export const currentUser = async (req, res) => {
     res.sendStatus(400);
   }
 };
- 
