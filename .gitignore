@@ -6,3 +6,4 @@ README.md
 df
 server/.env
 server/node_modules/
+server/.gitignore
