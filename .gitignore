@@ -5,3 +5,4 @@ README.md
 .editorconfig
 df
 server/.env
+server/node_modules/
