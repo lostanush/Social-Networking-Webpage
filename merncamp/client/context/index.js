@@ -9,36 +9,28 @@ const UserProvider = ({ children }) => {
     user: {},
     token: "",
   });
+  const router = useRouter();
 
   useEffect(() => {
     const auth = JSON.parse(window.localStorage.getItem("auth"));
     if (auth) {
       setState(auth);
     }
+    console.log(state);
   }, []);
-
-  const router = useRouter();
 
   const token = state && state.token ? state.token : "";
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_API;
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
   axios.interceptors.response.use(
-    function (response) {
-      // Any status code that lies within the range of 2xx causes this function to trigger
-      // Do something with response data
-      return response;
-    },
-    function (error) {
-      // Do something with response error
+    (response) => response,
+    (error) => {
       let res = error.response;
       if (res.status === 401 && !res.config._isRetryRequest) {
-        setState({
-          user: {},
-          token: "",
-        });
+        setState(null);
         window.localStorage.removeItem("auth");
-        router.push("/login");
+        router.push("/");
       }
       return Promise.reject(error);
     }

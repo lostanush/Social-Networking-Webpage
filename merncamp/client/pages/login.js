@@ -41,6 +41,7 @@ const login = () => {
   };
 
   if (state && state.token) router.push("/");
+
   return (
     <div className="container-fluid">
       <div className="row py-5 bg-default-img text-light">
@@ -70,6 +71,11 @@ const login = () => {
           </p>
         </div>
       </div>
+      <small>
+        <p className="text-center text-danger">
+          <Link href="/forgot-password">forget password</Link>
+        </p>
+      </small>
     </div>
   );
 };

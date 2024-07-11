@@ -3,7 +3,7 @@ import { UserContext } from "../../context";
 import UserRoute from "../../components/router/UserRoute";
 
 const dashboard = () => {
-  const [state, setState] = useContext(UserContext);
+  const [state] = useContext(UserContext);
 
   return (
     <UserRoute>

@@ -1,6 +1,6 @@
+import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import { hashPassword, comparePassword } from "../helpers/auth.js";
-import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   const { name, email, password, secret } = req.body;
@@ -47,7 +47,7 @@ export const login = async (req, res) => {
     if (!match) return res.status(400).send("Wrong Password");
     //...token making ...
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1200",
+      expiresIn: "10s",
     });
     user.password = undefined;
     user.secret = undefined;
@@ -68,7 +68,6 @@ export const currentUser = async (req, res) => {
     //console.log(req.headers);
     //console.log(req.user);
     // console.log(req.auth);
-
     const user = await User.findById(req.auth._id);
     //res.json(user);
     res.json({ ok: true });

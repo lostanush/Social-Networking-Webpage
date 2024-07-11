@@ -10,7 +10,7 @@ const UserRoute = ({ children }) => {
 
   useEffect(() => {
     if (state && state.token) getCurrentUser();
-  }, [state.token]);
+  }, state && [state.token]);
 
   const getCurrentUser = async () => {
     try {

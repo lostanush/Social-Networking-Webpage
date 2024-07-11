@@ -30,7 +30,7 @@ const Nav = () => {
         <b>MernCamp</b>
       </Link>
 
-      {state !== null ? (
+      {state && state.token !== "" ? (
         <>
           <Link
             href="/users/dashboard"

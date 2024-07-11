@@ -10,16 +10,14 @@ import "../styles/globals.css";
 const MyApp = ({ Component, pageProps }) => {
   return (
     <UserProvider>
-      <Head>
-        <link rel="stylesheet" href="/css/styles.css" />
-      </Head>
       <Nav />
       <ToastContainer position="top-center" />
 
+      {/* <div style={{ backgroundColor: "grey" }}> */}
       <Component {...pageProps} />
+      {/* // </div> */}
     </UserProvider>
   );
 };
 
 export default MyApp;
-
