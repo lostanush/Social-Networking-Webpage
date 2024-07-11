@@ -4,3 +4,4 @@ git-filter-repo
 README.md
 .editorconfig
 df
+server/.env
