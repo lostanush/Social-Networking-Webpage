@@ -1,13 +1,9 @@
-anush
-git-filter-repo
-.env
-README.md
-.editorconfig
-df
+.vscode/
+#serverFolder
 server/.env
 server/node_modules/
 server/.gitignore
-.vscode/
+#clientFolder
 client/.next
 client/node_modules/
 client/.env.local
