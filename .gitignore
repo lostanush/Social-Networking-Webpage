@@ -7,3 +7,10 @@ df
 server/.env
 server/node_modules/
 server/.gitignore
+.vscode/
+client/.next
+client/node_modules/
+client/.env.local
+client/.gitignore
+client/babel.config.js
+client/next.config.js

@@ -1,0 +1,48 @@
+/* globals.css */
+body {
+  background-image: url("/image/japan.jpg");
+  /* background-color: navy; */
+  /* color: white; Optional: Change text color to ensure readability */
+  margin: 0; /* Optional: Remove default margin */
+  padding: 0; /* Optional: Remove default padding */
+  min-height: 100vh; /* Ensure the body takes up the full viewport height */
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+.bg-default-img {
+  background-image: url("/images/japan.jpg");
+  background-size: 100%;
+  height: 150px 300px;
+  text-shadow: 2px 2px #000;
+}
+img {
+  width: 500px;
+}
+.logo {
+  text-shadow: 2px 2px rgb(70, 13, 13);
+}
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  background-color: yellow;
+}
+
+.text-light {
+  color: white !important;
+}
+.nav {
+  background-color: red;
+}
+
+.nav-link.active {
+  background-color: yellow;
+  color: black !important;
+}
+
+.nav-link {
+  color: white !important; /* default text color for nav links */
+  text-decoration: none; /* remove underline */
+}

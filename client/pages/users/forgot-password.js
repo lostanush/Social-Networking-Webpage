@@ -1,0 +1,88 @@
+import axios from "axios";
+import Link from "next/link";
+import React, { useState, useContext } from "react";
+import { Button, Modal } from "antd";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import ForgotPasswordForm from "../../components/forms/ForgotPasswordForm";
+import { UserContext } from "../../context";
+
+const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [secret, setSecret] = useState("");
+  const [ok, setOk] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [state] = useContext(UserContext);
+
+  const handleSubmit = async (x) => {
+    x.preventDefault();
+    try {
+      setLoading(true);
+      // console.log("Sending data to backend:", { email, newPassword, secret }); // Log the data being sent
+      const { data } = await axios.post(`/forgot-password`, {
+        email,
+        newPassword,
+        secret,
+      });
+      //console.log(data);
+      console.log("forgot password res => ", data);
+
+      if (data.success) {
+        setEmail("");
+        setNewPassword("");
+        setSecret("");
+        setOk(true);
+        setLoading(false);
+      }
+    } catch (err) {
+      toast.error(err.response);
+    }
+  };
+
+  if (state && state.token) router.push("/");
+
+  return (
+    <div className="container-fluid">
+      <div className="row py-5 bg-default-img text-light">
+        <div className="col text-center">
+          <h1>Forgot Password Page : </h1>
+        </div>
+      </div>
+
+      <div className="row ">
+        <div className="col-md-6 offset-md-3">
+          <ForgotPasswordForm
+            handleSubmit={handleSubmit}
+            email={email}
+            setEmail={setEmail}
+            newPassword={newPassword}
+            setNewPassword={setNewPassword}
+            secret={secret}
+            setSecret={setSecret}
+            loading={loading}
+          />
+        </div>
+      </div>
+
+      <div className="row p-2">
+        <div className="col">
+          <Modal
+            title="Congratulations !!"
+            open={ok}
+            onCancel={() => setOk(false)}
+            footer={null}
+          >
+            <p>Congrats! You can login with new password now.</p>
+            <Link href="/login" className="btn btn-primary btn-sm">
+              Login
+            </Link>
+          </Modal>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ForgotPassword;
