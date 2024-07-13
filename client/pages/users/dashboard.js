@@ -4,20 +4,29 @@ import UserRoute from "../../components/router/UserRoute";
 import CreatePostForm from "../../components/CreatePostForm";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const dashboard = () => {
   const [state] = useContext(UserContext);
   const [content, setContent] = useState("");
   const router = useRouter();
 
-  const postSubmit = (e) => {
+  const postSubmit = async (e) => {
     e.preventDefault();
-    // console.log("post", content);
+    console.log("post : ", content);
     try {
-      const { data } = axios.post("/create-post", { content });
-      console.log("create post responce : ", data);
+      const { data } = await axios.post("/create-post", { content });
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        toast.success("Post created");
+        setContent("");
+      }
     } catch (err) {
-      console.log(err);
+      console.error(
+        "Error creating post:",
+        err.response ? err.response.data : err.message
+      );
     }
   };
 
