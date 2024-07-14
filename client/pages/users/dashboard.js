@@ -38,7 +38,7 @@ const dashboard = () => {
     // formData.append("content", content);
     console.log([...formData]);
     try {
-      // const { data } = axios.post("/upload-image", formData);
+      const { data } = axios.post("/upload-image", formData);
     } catch (err) {
       console.log(err);
     }

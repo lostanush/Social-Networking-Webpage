@@ -1,5 +1,6 @@
 import Post from "../models/post.js";
 
+//Saving Post to MongoDB:
 export const createPost = async (req, res) => {
   console.log("Post : ", req.body);
   const { content } = req.body;
@@ -15,5 +16,16 @@ export const createPost = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
+  }
+};
+
+//Saving Images to Cloudinary:
+export const uploadImage = async (req, res) => {
+  try {
+    console.log("req files : ", req.files);
+  } catch (error) {
+    res.json({
+      error: "Failed, Try again",
+    });
   }
 };
