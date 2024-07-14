@@ -33,14 +33,33 @@ const dashboard = () => {
   //Uploading Image
   const handleImage = async (e) => {
     const file = e.target.files[0];
+    console.log("Selected image:", file); // Log the selected image file
+
+    if (!file) {
+      console.error("No file selected");
+      return;
+    }
+
     let formData = new FormData();
     formData.append("image", file);
     // formData.append("content", content);
-    console.log([...formData]);
+    console.log("Form data:", [...formData]); // Log the form data
     try {
-      const { data } = axios.post("/upload-image", formData);
+      const { data } = await axios.post("/upload-image", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log("url : ", data);
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        toast.success("Image uploaded");
+      }
     } catch (err) {
-      console.log(err);
+      console.error(
+        "Error uploading image:",
+        err.response ? err.response.data : err.message
+      );
+      toast.error("Failed to upload image");
     }
   };
 

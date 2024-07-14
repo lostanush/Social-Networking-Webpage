@@ -1,5 +1,5 @@
 import { Avatar } from "antd";
-import { CameraOutlined } from "@ant-design/icons";
+import { CameraFilled } from "@ant-design/icons";
 
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -30,7 +30,7 @@ const CreatePostForm = ({ content, setContent, postSubmit, handleImage }) => {
         </button>
 
         <label>
-          <CameraOutlined className="mt-2" />
+          <CameraFilled className="mt-2" />
           <input
             onChange={handleImage}
             type="file"
