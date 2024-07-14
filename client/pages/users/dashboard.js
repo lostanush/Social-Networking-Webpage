@@ -18,12 +18,13 @@ const dashboard = () => {
     e.preventDefault();
     console.log("post : ", content);
     try {
-      const { data } = await axios.post("/create-post", { content });
+      const { data } = await axios.post("/create-post", { content, image });
       if (data.error) {
         toast.error(data.error);
       } else {
         toast.success("Post created");
         setContent("");
+        setImage({});
       }
     } catch (err) {
       console.error(

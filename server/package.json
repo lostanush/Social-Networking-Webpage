@@ -6,6 +6,10 @@
     "start": "nodemon server.js"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
+    "@ant-design/icons-svg": "^4.4.2",
+    "@svgr/webpack": "^8.1.0",
+    "antd": "^5.19.1",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.2.0",
     "cors": "^2.8.5",
@@ -16,6 +20,12 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^6.0.0",
     "morgan": "^1.10.0",
+    "next": "^14.2.5",
+    "next-transpile-modules": "^10.0.1",
+    "rc-animate": "^3.1.1",
+    "rc-util": "^5.43.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-toastify": "^10.0.5"
   },
   "devDependencies": {
