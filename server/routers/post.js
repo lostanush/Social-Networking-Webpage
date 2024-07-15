@@ -6,7 +6,7 @@ const router = express.Router();
 //middleware
 import { requireSignin } from "../middleware/auth.js";
 //Controllers
-import { createPost, uploadImage } from "../components/post.js";
+import { createPost, uploadImage, postByUser } from "../components/post.js";
 
 router.post("/create-post", requireSignin, createPost);
 router.post(
@@ -15,6 +15,6 @@ router.post(
   formidable({ maxFileSize: 5 * 1024 * 1024 }),
   uploadImage
 );
-// router.get("/user-posts", requireSignin, postByUser);
+router.get("/user-posts", requireSignin, postByUser);
 
 export default router;

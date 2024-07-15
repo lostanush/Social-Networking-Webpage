@@ -48,20 +48,20 @@ export const uploadImage = async (req, res) => {
   }
 };
 
-// export const postByUser = async (req, res) => {
-//   try {
-//     console.log(req.auth._id);
-//     const posts = await Post.find({ postBy: req.auth._id })
-//       .populate("postedBy", "_id name image")
-//       .sort({ createdAt: -1 })
-//       .limit(10);
-//     console.log(posts);
-//     // console.log("hello ", req.body);
-//     res.json(posts);
-//   } catch (err) {
-//     console.log("error: ", err);
-//     res.json({
-//       error: "Please refresh",
-//     });
-//   }
-// };
+export const postByUser = async (req, res) => {
+  try {
+    // console.log(req.auth._id);
+    const posts = await Post.find({ postBy: req.auth._id })
+      .populate("postedBy", "_id name image")
+      .sort({ createdAt: -1 })
+      .limit(10);
+    console.log(posts);
+    // // console.log("hello ", req.body);
+    res.json(posts);
+  } catch (err) {
+    console.log("error: ", err);
+    res.json({
+      error: "Please refresh",
+    });
+  }
+};

@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../context";
 import UserRoute from "../../components/router/UserRoute";
 import CreatePostForm from "../../components/CreatePostForm";
+import PostList from "../../components/cards/PostList";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -12,26 +13,28 @@ const dashboard = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState({});
   const [uploading, setUploading] = useState(false);
+  const [posts, setPosts] = useState([]);
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (state && state.token) fetchUserPosts();
-  // }, [state && state.token]);
+  useEffect(() => {
+    if (state?.token) fetchUserPosts();
+  }, [state?.token]); // Simplify to state?.token
 
-  // const fetchUserPosts = async () => {
-  //   try {
-  //     const { data } = axios.get("/user-posts");
-  //     console.log("userPosts : ", data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const fetchUserPosts = async () => {
+    try {
+      const { data } = await axios.get("/user-posts");
+      // console.log("userPosts : ", data);
+      setPosts(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const postSubmit = async (e) => {
     e.preventDefault();
-    console.log("post : ", content);
-    console.log("image : ", image);
+    // console.log("post : ", content);
+    // console.log("image : ", image);
 
     try {
       const { data } = await axios.post("/create-post", { content, image });
@@ -102,7 +105,12 @@ const dashboard = () => {
               image={image}
               uploading={uploading}
             />
+
+            <PostList posts={posts} />
           </div>
+
+          {/* <pre>{JSON.stringify(posts, null, 4)}</pre> */}
+
           <div className="col-md-4">Sidebar</div>
         </div>
       </div>
