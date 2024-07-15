@@ -8,15 +8,31 @@ import { toast } from "react-toastify";
 
 const dashboard = () => {
   const [state] = useContext(UserContext);
+  //state
   const [content, setContent] = useState("");
   const [image, setImage] = useState({});
   const [uploading, setUploading] = useState(false);
 
   const router = useRouter();
 
+  // useEffect(() => {
+  //   if (state && state.token) fetchUserPosts();
+  // }, [state && state.token]);
+
+  // const fetchUserPosts = async () => {
+  //   try {
+  //     const { data } = axios.get("/user-posts");
+  //     console.log("userPosts : ", data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   const postSubmit = async (e) => {
     e.preventDefault();
     console.log("post : ", content);
+    console.log("image : ", image);
+
     try {
       const { data } = await axios.post("/create-post", { content, image });
       if (data.error) {
@@ -25,6 +41,7 @@ const dashboard = () => {
         toast.success("Post created");
         setContent("");
         setImage({});
+        setUploading(false);
       }
     } catch (err) {
       console.error(
@@ -36,35 +53,26 @@ const dashboard = () => {
 
   //Uploading Image
   const handleImage = async (e) => {
-    const file = e.target.files[0];
-    console.log("Selected image:", file); // Log the selected image file
-
+    const file = e.target.files[0]; // console.log("Selected image:", file); // Log the selected image file
     if (!file) {
       console.error("No file selected");
       return;
     }
-
     let formData = new FormData();
     formData.append("image", file);
     // formData.append("content", content);
-    console.log("Form data:", [...formData]); // Log the form data
+    // console.log("Form data:", [...formData]); // Log the form data
 
     setUploading(true);
     try {
       const { data } = await axios.post("/upload-image", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log("url : ", data);
+      // console.log("url : ", data);
       setImage({
         url: data.url,
         public_id: data.public_id,
       });
-
-      if (data.error) {
-        toast.error(data.error);
-      } else {
-        toast.success("Image uploaded");
-      }
     } catch (err) {
       setUploading(false);
       console.error(

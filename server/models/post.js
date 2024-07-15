@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema(
       type: {},
       required: true,
     },
-    postBy: {
+    postedBy: {
       type: String,
       ref: "User",
     },

@@ -15,5 +15,6 @@ router.post(
   formidable({ maxFileSize: 5 * 1024 * 1024 }),
   uploadImage
 );
+// router.get("/user-posts", requireSignin, postByUser);
 
 export default router;
