@@ -46,3 +46,7 @@ img {
   color: white !important; /* default text color for nav links */
   text-decoration: none; /* remove underline */
 }
+
+custom-box-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

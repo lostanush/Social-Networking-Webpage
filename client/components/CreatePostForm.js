@@ -14,7 +14,7 @@ const CreatePostForm = ({
   image,
 }) => {
   return (
-    <div className="card">
+    <div className="card mb-3">
       <div className="card-body pb-1">
         <form className="form-group">
           <ReactQuill

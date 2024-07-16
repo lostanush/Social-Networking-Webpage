@@ -33,7 +33,7 @@ export const uploadImage = async (req, res) => {
   try {
     // console.log("req files : ", req.files.image.path);
     const result = await cloudinary.uploader.upload(req.files.image.path);
-    // console.log("Uploaded image URL:", result.secure_url); // Log the image URL
+    console.log("Uploaded image URL:", result.secure_url); // Log the image URL
     res.json({
       url: result.secure_url,
       public_id: result.public_id,
@@ -55,7 +55,7 @@ export const postByUser = async (req, res) => {
       .populate("postedBy", "_id name image")
       .sort({ createdAt: -1 })
       .limit(10);
-    console.log(posts);
+    // console.log(posts);
     // // console.log("hello ", req.body);
     res.json(posts);
   } catch (err) {

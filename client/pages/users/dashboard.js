@@ -24,7 +24,9 @@ const dashboard = () => {
   const fetchUserPosts = async () => {
     try {
       const { data } = await axios.get("/user-posts");
-      // console.log("userPosts : ", data);
+      console.log("userPosts : ", data);
+      console.log("Av : ", data[0].postedBy.name[0]);
+
       setPosts(data);
     } catch (err) {
       console.log(err);
@@ -88,14 +90,14 @@ const dashboard = () => {
 
   return (
     <UserRoute>
-      <div className="container-fluid">
+      <div className="container-fluid mb-5 ">
         <div className="row py-5 bg-default-img text-light">
           <div className="col text-center">
             <h1>Newsfeed</h1>
           </div>
         </div>
 
-        <div className="row py-3">
+        <div className="row py-3 ">
           <div className="col-md-8">
             <CreatePostForm
               content={content}
