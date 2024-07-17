@@ -85,6 +85,7 @@ const dashboard = () => {
         err.response ? err.response.data : err.message
       );
       toast.error("Failed to upload image");
+      //COMMENT
     }
   };
 
