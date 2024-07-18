@@ -37,13 +37,13 @@ const dashboard = () => {
     e.preventDefault();
     // console.log("post : ", content);
     // console.log("image : ", image);
-
     try {
       const { data } = await axios.post("/create-post", { content, image });
       if (data.error) {
         toast.error(data.error);
       } else {
         toast.success("Post created");
+        fetchUserPosts();
         setContent("");
         setImage({});
         setUploading(false);

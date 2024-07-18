@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { useRouter } from "next/router";
+import { UserContext } from "../../context";
 import renderHTML from "react-render-html";
 import moment from "moment";
 import {
@@ -7,6 +10,7 @@ import {
   HeartOutlined,
   CommentOutlined,
   DislikeOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
 
 import { Avatar } from "antd";
@@ -14,6 +18,9 @@ import { Card, Flex } from "antd";
 import PostImage from "../images/PostImage";
 
 const PostList = ({ posts }) => {
+  const [state] = useContext(UserContext);
+  const router = useRouter();
+
   return (
     <Flex wrap gap="small" align="start" vertical={false} className="py-1">
       {posts &&
@@ -87,27 +94,56 @@ const PostList = ({ posts }) => {
                 <div>{post.image && <PostImage url={post.image.url} />}</div>
                 <div
                   // style={{ border: " 1px solid green" }}
-                  className="d-flex justify-content-start align-items-end p-1"
+                  className="d-flex justify-content-between align-items-end p-1"
                 >
-                  <div className="p-1 marginRight-5">
-                    <big className="ml-10">
-                      {" "}
-                      <HeartOutlined />
-                    </big>{" "}
-                    <small className="text-muted">Like</small>
+                  <div
+                    // style={{ border: " 1px solid green" }}
+                    className="d-flex align-item-center"
+                  >
+                    <div className="p-1">
+                      <big className="ml-10  mx-1 text-danger">
+                        <HeartOutlined />
+                      </big>
+                      <small className="text-muted">Like</small>
+                    </div>
+
+                    <div className="p-1 text-muted">
+                      <big className="ml-10  mx-1 ">
+                        <DislikeOutlined />
+                      </big>
+                      <small className="text-muted">dislike</small>
+                    </div>
+
+                    <div className="p-1 text-muted">
+                      <big className="ml-10  mx-1 ">
+                        <CommentOutlined />
+                      </big>
+                      <small className="text-muted">comments</small>
+                    </div>
                   </div>
-                  <div className="p-1 marginRight-5">
-                    <big className="p-1">
-                      <DislikeOutlined />
-                    </big>
-                    Dislike
-                  </div>
-                  <div className="p-1 marginRight-5">
-                    <big className="p-1">
-                      <CommentOutlined />
-                    </big>
-                    Comments
-                  </div>
+                  {state &&
+                    state.user &&
+                    state.user._id === post.postedBy._id && (
+                      <div
+                        // style={{ border: " 1px solid green" }}
+                        className="d-flex justify-content-start align-items-end p-1"
+                      >
+                        <div className="p-1 marginRight-5">
+                          <small className="p-1">
+                            <EditOutlined
+                              onClick={() => {
+                                router.push(`/user/post/${post._id}`);
+                              }}
+                            />
+                          </small>
+                        </div>
+                        <div className="p-1 marginRight-5">
+                          <small className="p-1">
+                            <DeleteOutlined className="text-danger" />
+                          </small>
+                        </div>
+                      </div>
+                    )}
                 </div>
               </div>
             </Card>
