@@ -17,7 +17,7 @@ import { Avatar } from "antd";
 import { Card, Flex } from "antd";
 import PostImage from "../images/PostImage";
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, handleDelete }) => {
   const [state] = useContext(UserContext);
   const router = useRouter();
 
@@ -132,14 +132,17 @@ const PostList = ({ posts }) => {
                           <small className="p-1">
                             <EditOutlined
                               onClick={() => {
-                                router.push(`/user/post/${post._id}`);
+                                router.push(`/users/post/${post._id}`);
                               }}
                             />
                           </small>
                         </div>
                         <div className="p-1 marginRight-5">
                           <small className="p-1">
-                            <DeleteOutlined className="text-danger" />
+                            <DeleteOutlined
+                              className="text-danger"
+                              onClick={() => handleDelete(post)}
+                            />
                           </small>
                         </div>
                       </div>

@@ -4,9 +4,17 @@ import formidable from "express-formidable";
 const router = express.Router();
 
 //middleware
-import { requireSignin } from "../middleware/auth.js";
+import { requireSignin, canEditDeletePost } from "../middleware/auth.js";
+
 //Controllers
-import { createPost, uploadImage, postByUser } from "../components/post.js";
+import {
+  createPost,
+  uploadImage,
+  postByUser,
+  userPost,
+  updatePost,
+  deletePost,
+} from "../components/post.js";
 
 router.post("/create-post", requireSignin, createPost);
 router.post(
@@ -16,5 +24,14 @@ router.post(
   uploadImage
 );
 router.get("/user-posts", requireSignin, postByUser);
+router.get("/user-post/:_id", requireSignin, userPost);
+router.put("/update-post/:_id", requireSignin, canEditDeletePost, updatePost);
+router.delete(
+  "/delete-post/:_id",
+  requireSignin,
+  canEditDeletePost,
+  deletePost
+);
 
 export default router;
+//
