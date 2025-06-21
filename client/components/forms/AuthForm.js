@@ -10,11 +10,41 @@ const AuthForm = ({
   setSecret,
   loading,
   page,
+  username,
+  setUsername,
+  about,
+  setAbout,
+  ProfileUpdate,
 }) => {
   return (
-    <div>
+    <div
+      className="border p-4 mt-3 mb-3"
+      // style={{
+      //   backgroundImage: "url('/bg.jpeg')",
+      //   backgroundRepeat: "no-repeat",
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
+    >
       <form onSubmit={handleSubmit}>
+        {/* Name : (visible only in registration and ProfileUpdate) */}
         {page !== "login" && (
+          <div className="form-group p-2">
+            <small>
+              <label className="text-muted">Your Name :</label>
+            </small>
+            <input
+              type="text"
+              placeholder="Enter Your name"
+              className="form-control"
+              value={name}
+              onChange={(x) => setName(x.target.value)}
+            ></input>
+          </div>
+        )}
+
+        {/* Username : (visible only in ProfileUpdate) */}
+        {ProfileUpdate && (
           <div className="form-group p-2">
             <small>
               <label className="text-muted">Username :</label>
@@ -23,11 +53,13 @@ const AuthForm = ({
               type="text"
               placeholder="Enter username"
               className="form-control"
-              value={name}
-              onChange={(x) => setName(x.target.value)}
+              value={username}
+              onChange={(x) => setUsername(x.target.value)}
             ></input>
           </div>
-        )}
+        )}  
+
+        {/* Email : (visible in all forms) */}
         <div className="form-group p-2">
           <small>
             <label className="text-muted">Email address :</label>
@@ -38,9 +70,11 @@ const AuthForm = ({
             className="form-control"
             value={email}
             onChange={(x) => setEmail(x.target.value)}
+            disabled={ProfileUpdate}
           ></input>
         </div>
 
+        {/* Password : (visible in all forms) */}
         <div className="form-group p-2">
           <small>
             <label className="text-muted">Password :</label>
@@ -54,6 +88,7 @@ const AuthForm = ({
           ></input>
         </div>
 
+        {/* Secret : (visible only in registration and ProfileUpdate) */}
         {page !== "login" && (
           <>
             <div className="form-group p-2">
@@ -81,10 +116,30 @@ const AuthForm = ({
             </div>
           </>
         )}
+
+        {/* About : (visible only in ProfileUpdate) */}
+        {ProfileUpdate && (
+          <div className="form-group p-2">
+            <small>
+              <label className="text-muted">About :</label>
+            </small>
+            <input
+              type="text"
+              placeholder="Write about yourself..."
+              className="form-control"
+              value={about}
+              onChange={(x) => setAbout(x.target.value)}
+            ></input>
+          </div>
+        )}
+
+        {/* Submit Button : (visible in all forms) */}
         <div className="form-group p-2">
           <button
             disabled={
-              page === "login"
+              ProfileUpdate
+                ? loading
+                : page === "login"
                 ? !email || !password || loading
                 : !name || !email || !password || !secret || loading
             }

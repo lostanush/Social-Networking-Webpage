@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import { hashPassword, comparePassword } from "../helpers/auth.js";
+import {nanoid} from "nanoid"; 
+// Assuming namoid is a function or variable you need to import
 
 export const register = async (req, res) => {
   const { name, email, password, secret } = req.body;
@@ -30,12 +32,7 @@ export const register = async (req, res) => {
   }
 
   const hashedPassword = await hashPassword(password);
-  const user = new User({
-    name,
-    email,
-    password: hashedPassword, // Assign the hashed password
-    secret,
-  });
+  const user = new User({ name, email, password: hashedPassword, secret, username : nanoid(6) }); // Create a new user instance with hashed password
 
   try {
     await user.save();
@@ -101,6 +98,19 @@ export const currentUser = async (req, res) => {
   }
 };
 
+// export const profileUpdate = async (req, res) => {
+// //   try {
+// //     console.log("Profile update request received:", req.body); // Log the request body
+// //   } catch (err) {
+// //     if (err.code == 11000) {
+// //       return res.json({
+// //         error: "Username or Email already exists",
+// //       });
+// //     }
+// //     return res.status(500).json({ error: "Internal server error" });
+// //   }
+// // };
+
 export const forgotPassword = async (req, res) => {
   // console.log("Received request at /forgot-password endpoint"); // Log endpoint access
   // console.log(req.body); // Log the received data
@@ -134,3 +144,22 @@ export const forgotPassword = async (req, res) => {
     });
   }
 };
+
+export const profileUpdate = async (req, res) => {
+  try{
+    console.log("Profile update request received:", req.body); // Log the request body
+    // console.log("User Profile Updated => ", user);
+    // user.password = undefined;
+    // user.secret = undefined;
+    // res.json(user);
+
+  }catch(err) {
+    if(err.code === 11000) {
+      return res.json({
+        error: "Username or Email already exists",
+      });
+    }
+    console.log(err);
+  }
+};
+

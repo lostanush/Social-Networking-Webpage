@@ -23,6 +23,7 @@ const PostList = ({ posts, handleDelete }) => {
 
   return (
     <Flex wrap gap="small" align="start" vertical={false} className="py-1">
+      {/* {console.log("PostList posts: ", posts)} */}
       {posts &&
         posts.map((post) => (
           <div key={post._id}>
@@ -33,26 +34,7 @@ const PostList = ({ posts, handleDelete }) => {
                 // border: "1px solid crimson",
               }}
               title={
-                <div
-                  className="d-flex align-item-center justify-content-between"
-                  // align={"center"}
-                  // justify={"space-between"}
-                  style={
-                    {
-                      // height: "100%",
-                      // width: "100%",
-                      // border: "1px solid crimson", //
-                      // padding: "0",
-                      // marginTop: "-24px",
-                      // padding: "-24px",
-                      // marginLeft: "-24px",
-                      // marginBottom: "-20px",
-                      // marginRight: "-24px",
-                      // height: "100%",
-                      // width: "100%",
-                    }
-                  }
-                >
+                <div className="d-flex align-item-center justify-content-between">
                   {
                     <Avatar
                       style={{
@@ -61,11 +43,11 @@ const PostList = ({ posts, handleDelete }) => {
                         color: "#f56a00",
                       }}
                     >
-                      {post.postedBy.name[0]}
+                      {post && "A"}
                     </Avatar>
                   }
 
-                  {post.postedBy.name}
+                  {post && "A"}
 
                   <small className="text-muted">
                     {moment(post.createdAt).fromNow()}

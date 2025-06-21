@@ -18,9 +18,11 @@
     "express-formidable": "^1.2.0",
     "express-jwt": "^8.4.1",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.17.0",
     "mongoose": "^6.0.0",
     "morgan": "^1.10.0",
-    "next": "^14.2.5",
+    "nanoid": "^5.1.5",
+    "next": "^15.3.3",
     "next-transpile-modules": "^10.0.1",
     "rc-animate": "^3.1.1",
     "rc-util": "^5.43.0",
@@ -29,7 +31,7 @@
     "react-toastify": "^10.0.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^3.1.10"
   },
   "type": "module"
 }

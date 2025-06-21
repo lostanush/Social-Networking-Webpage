@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 
 const dashboard = () => {
   const [state] = useContext(UserContext);
-  //state
   const [content, setContent] = useState("");
   const [image, setImage] = useState({});
   const [uploading, setUploading] = useState(false);
@@ -21,6 +20,7 @@ const dashboard = () => {
     if (state?.token) fetchUserPosts();
   }, [state?.token]); // Simplify to state?.token
 
+  //extracting posts infomration from the mongoDB.
   const fetchUserPosts = async () => {
     try {
       const { data } = await axios.get("/user-posts");
@@ -132,4 +132,5 @@ const dashboard = () => {
     </UserRoute>
   );
 };
+
 export default dashboard;
