@@ -22,7 +22,7 @@ const register = () => {
 
     try {
       setLoading(true);
-      //console.log(name, email, password, secret);
+      console.log(name, email, password, secret);
       const { data } = await axios.post(`/register`, {
         name,
         email,

@@ -18,7 +18,7 @@ const AuthForm = ({
 }) => {
   return (
     <div
-      className="border p-4 mt-3 mb-3"
+      className="border p-4 mt-3 mb-3" 
       // style={{
       //   backgroundImage: "url('/bg.jpeg')",
       //   backgroundRepeat: "no-repeat",

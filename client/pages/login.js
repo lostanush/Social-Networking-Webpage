@@ -58,7 +58,7 @@ const login = () => {
 
       <div className="row ">
         <div className="col-md-6 offset-md-3">
-          <AuthForm
+          <AuthForm 
             handleSubmit={handleSubmit}
             email={email}
             setEmail={setEmail}

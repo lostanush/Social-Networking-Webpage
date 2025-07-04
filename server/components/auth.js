@@ -47,7 +47,6 @@ export const register = async (req, res) => {
 };
 
 //export default register;
-
 export const login = async (req, res) => {
   console.log(req.body);
   try {
@@ -83,7 +82,6 @@ export const login = async (req, res) => {
 };
 
 //export default login ;
-
 export const currentUser = async (req, res) => {
   try {
     //console.log(req.headers);
@@ -98,19 +96,8 @@ export const currentUser = async (req, res) => {
   }
 };
 
-// export const profileUpdate = async (req, res) => {
-// //   try {
-// //     console.log("Profile update request received:", req.body); // Log the request body
-// //   } catch (err) {
-// //     if (err.code == 11000) {
-// //       return res.json({
-// //         error: "Username or Email already exists",
-// //       });
-// //     }
-// //     return res.status(500).json({ error: "Internal server error" });
-// //   }
-// // };
-
+//export default currentUser;
+// forgot password
 export const forgotPassword = async (req, res) => {
   // console.log("Received request at /forgot-password endpoint"); // Log endpoint access
   // console.log(req.body); // Log the received data
@@ -145,13 +132,42 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
+//export default forgotPassword;
+// profile update
 export const profileUpdate = async (req, res) => {
   try{
     console.log("Profile update request received:", req.body); // Log the request body
-    // console.log("User Profile Updated => ", user);
-    // user.password = undefined;
-    // user.secret = undefined;
-    // res.json(user);
+    const data = {};
+
+    if(req.body.name) {
+      data.name = req.body.name;
+    }
+    if(req.body.about){
+      data.about = req.body.about;
+    }
+    if(req.body.password ) {
+      if(req.body.password.length < 4) {
+        return res.json({
+          error: "Password must be at least 4 characters long",
+        });
+      }
+      else {
+        data.password = await hashPassword(req.body.password);
+      }
+    }
+    if(req.body.secret){
+      data.secret = req.body.secret;
+    }
+    if (req.body.image) {
+      data.image = req.body.image;
+    }
+
+    let user = await User.findByIdAndUpdate(req.auth._id,{ $set: data },{ new: true });
+
+    console.log("User Profile Updated => ", user);
+    user.password = undefined;
+    user.secret = undefined;
+    res.json(user);
 
   }catch(err) {
     if(err.code === 11000) {

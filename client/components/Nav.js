@@ -36,7 +36,7 @@ const Nav = () => {
     <nav className="nav d-flex justify-content-between align-items-center  p-1">
       <Link
         href="/"
-        className={`nav-link  ${current === "/" ? "active" : " logo"}`}
+        className={`nav-link ${current === "/" ? "active" : " logo"}`}
       >
         <b>MernCamp</b>
       </Link>

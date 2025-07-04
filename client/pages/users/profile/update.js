@@ -1,11 +1,12 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useState, useContext, useEffect } from "react";
-import { Button, Modal } from "antd";
+import { Button, Modal, Avatar } from "antd";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import AuthForm from "../../../components/forms/AuthForm";
-import { UserContext } from "../../../context//index.js";
+import { UserContext } from "../../../context/index.js";
+import {LoadingOutlined, CameraOutlined,CameraFilled } from "@ant-design/icons";
 
 const ProfileUpdate = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +18,11 @@ const ProfileUpdate = () => {
   const [ok, setOk] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const [state] = useContext(UserContext);
+  const [state, setState] = useContext(UserContext);
+  //profile image :
+  const [image, setImage] = useState("");
+  const [uploading, setUploading] = useState(false);
+
 
   const handleSubmit = async (x) => {
     x.preventDefault();
@@ -32,8 +37,10 @@ const ProfileUpdate = () => {
         secret,
         username,
         about,
+        image,
       });
       console.log("PROFILE UPDATE RESPONSE => ", data);
+      toast.success("Profile updated successfully");
       if (data.error) {
         toast.error(data.error);
         setLoading(false);
@@ -42,8 +49,15 @@ const ProfileUpdate = () => {
         setEmail("");
         setPassword("");
         setSecret("");
-        setOk(data.ok);
+        setOk(true);
         setLoading(false);
+        //update user in local storage,update user, keep token
+        let auth = JSON.parse(localStorage.getItem("auth"));
+        auth.user = data;
+        localStorage.setItem("auth", JSON.stringify(auth));
+        //update user in context
+        //using sparse operator to update user in context
+        setState({...state, user: data });
       }
     } catch (err) {
       toast.error(err.response.data);
@@ -51,7 +65,7 @@ const ProfileUpdate = () => {
     }
   };
 
-  // if (state && state.token) router.push("/");
+  if (!state && !state.token) router.push("/");
 
   useEffect(() => {
     if (state && state.user) {
@@ -59,9 +73,42 @@ const ProfileUpdate = () => {
       setAbout(state.user.about);
       setName(state.user.name);
       setEmail(state.user.email);
+      setImage(state.user.image || "");
     }
   }, [state]);
 
+
+   const handleImage = async (e) => {
+      const file = e.target.files[0]; // console.log("Selected image:", file); // Log the selected image file
+      if (!file) {
+        console.error("No file selected");
+        return;
+      }
+      let formData = new FormData();
+      formData.append("image", file);
+      // formData.append("content", content);
+      // console.log("Form data:", [...formData]); // Log the form data
+  
+      setUploading(true);
+      try {
+        const { data } = await axios.post("/upload-image", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        // console.log("url : ", data);
+        setImage({
+          url: data.url,
+          public_id: data.public_id,
+        });
+      } catch (err) {
+        setUploading(false);
+        console.error(
+          "Error uploading image:",
+          err.response ? err.response.data : err.message
+        );
+        toast.error("Failed to upload image");
+        //COMMENT
+      }
+    };
 
   return (
     <div className="container-fluid">
@@ -70,6 +117,22 @@ const ProfileUpdate = () => {
           <h1>Profile : </h1>
         </div>
       </div>
+
+      <label className="d-flex justify-content-center h5 mt-3">
+        {image && image.url ? (
+          <Avatar size={30} src={image.url} />
+        ) : loading ? (
+          <LoadingOutlined className="mt-2" />
+        ) : (
+          <CameraFilled className="mt-2" />
+        )}
+        <input
+          onChange={handleImage}
+          type="file"
+          accept="images/*"
+          hidden
+        ></input>
+      </label>
 
       <div className="row ">
         <div className="col-md-6 offset-md-3">
@@ -101,14 +164,12 @@ const ProfileUpdate = () => {
             onCancel={() => setOk(false)}
             footer={null}
           >
-            <p>You have successfully registered.</p>
+            <p>You have successfully Updated you Profile.</p>
             <Link href="/login" className="btn btn-primary btn-sm">
               Login
             </Link>
           </Modal>
         </div>
-
-        
       </div>
     </div>
   );
